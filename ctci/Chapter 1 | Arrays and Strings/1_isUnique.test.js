@@ -1,26 +1,31 @@
 /**
- * Is Unique: Implement an algorithm to determine if a string has all unique
- * characters. What if you cannot use an additional data structure?
+ * Is Unique
+ * Implement an algorithm to determine if a string has all unique characters.
+ * What if you cannot use an additional data structure?
  * */
 
 const strFuncs = require('./String/String');
 
-test('rejects strings that are not unique', () => {
-  const str = "Hello";
-  expect(strFuncs.isUnique(str)).toBeFalsy();
+test('returns false on strings do not have unique characters', () => {
+  const str = "Burger";
+  const isUnique = strFuncs.isUnique(str);
+  expect(isUnique).toBeFalsy();
 });
 
-test('accepts strings that are unique (ignore whitespace)', () => {
+test('returns true on strings that are unique (ignores whitespace)', () => {
   const str = "   World!   ";
-  expect(strFuncs.isUnique(str)).toBeTruthy();
+  const isUnique = strFuncs.isUnique(str);
+  expect(isUnique).toBeTruthy();
 });
 
-test('rejects strings that are not unique', () => {
-  const str = "Hello";
-  expect(strFuncs.isUniqueHash(str)).toBeFalsy();
+test('returns false on strings do not have unique characters', () => {
+  const str = "Burger";
+  const isUnique = strFuncs.isUniqueHash(str);
+  expect(isUnique).toBeFalsy();
 });
 
-test('accepts strings that are unique (ignore whitespace)', () => {
+test('returns true on strings that are unique (ignores whitespace)', () => {
   const str = "   World!   ";
-  expect(strFuncs.isUniqueHash(str)).toBeTruthy();
+  const isUnique = strFuncs.isUniqueHash(str);
+  expect(isUnique).toBeTruthy();
 });

@@ -5,48 +5,57 @@
  * in place?
  * */
 
-const arrFuncs = require('./Array/Array');
+const arrFuncs = require('../Data Structures/Array/Array');
 
-const checkHelper = (output, expectedOutput, n) => {
+const checkHelper = (input, expectedOutput) => {
+  const n = input.length;
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
-      expect(output[i][j]).toBe(expectedOutput[i][j]);
+      expect(input[i][j]).toBe(expectedOutput[i][j]);
     }
   }
 };
 
+test('check if empty matrix is rejected', () => {
+  const input = [];
+  const output = arrFuncs.rotateMatrix(input);
+  expect(output).toBeFalsy();
+});
+
+test('check if empty 1x1 matrix is rejected', () => {
+  const input = [[]];
+  const output = arrFuncs.rotateMatrix(input);
+  expect(output).toBeFalsy();
+});
+
+test('check if 1x2 matrix is rejected', () => {
+  const input = [[1,2]];
+  const output = arrFuncs.rotateMatrix(input);
+  expect(output).toBeFalsy();
+});
+
 test('check if 1x1 matrix is rotated correctly', () => {
-  const input = [
-    [1],
-  ];
-  const expectedOutput = [
-    [1],
-  ];
-  const n = input.length;
-  const output = arrFuncs.rotateMatrix(input, n);
-  checkHelper(output, expectedOutput, n);
+  const input = [[1]];
+  const expectedOutput = [[1]];
+  const output = arrFuncs.rotateMatrix(input);
+  expect(output).toBeTruthy();
+  checkHelper(input, expectedOutput);
 });
 
 test('check if 2x2 matrix is rotated correctly', () => {
-  const input = [
-    [1, 2],
-    [3, 4]
-  ];
-  const expectedOutput = [
-    [3, 1],
-    [4, 2]
-  ];
-  const n = input.length;
-  const output = arrFuncs.rotateMatrix(input, n);
-  checkHelper(output, expectedOutput, n);
+  const input = [[1, 2], [3, 4]];
+  const expectedOutput = [[3, 1], [4, 2]];
+  const output = arrFuncs.rotateMatrix(input);
+  expect(output).toBeTruthy();
+  checkHelper(input, expectedOutput);
 });
 
 test('check if 3x3 matrix is rotated correctly', () => {
   const input = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
   const expectedOutput = [[7, 4, 1], [8, 5, 2], [9, 6, 3]];
-  const n = input.length;
-  const output = arrFuncs.rotateMatrix(input, n);
-  checkHelper(output, expectedOutput, n);
+  const output = arrFuncs.rotateMatrix(input);
+  expect(output).toBeTruthy();
+  checkHelper(input, expectedOutput);
 });
 
 test('check if 4x4 matrix is rotated correctly', () => {
@@ -62,7 +71,27 @@ test('check if 4x4 matrix is rotated correctly', () => {
     [15, 11, 7, 3],
     [16, 12, 8, 4],
   ];
-  const n = input.length;
-  const output = arrFuncs.rotateMatrix(input, n);
-  checkHelper(output, expectedOutput, n);
+  const output = arrFuncs.rotateMatrix(input);
+  expect(output).toBeTruthy();
+  checkHelper(input, expectedOutput);
+});
+
+test('check if 5x5 matrix is rotated correctly', () => {
+  const input = [
+    [1, 2, 3, 4, 5],
+    [6, 7, 8, 9, 10],
+    [11, 12, 13, 14, 15],
+    [16, 17, 18, 19, 20],
+    [21, 22, 23, 24, 25],
+  ];
+  const expectedOutput = [
+    [21, 16, 11, 6, 1],
+    [22, 17, 12, 7, 2],
+    [23, 18, 13, 8, 3],
+    [24, 19, 14, 9, 4],
+    [25, 20, 15, 10, 5],
+  ];
+  const output = arrFuncs.rotateMatrix(input);
+  expect(output).toBeTruthy();
+  checkHelper(input, expectedOutput);
 });

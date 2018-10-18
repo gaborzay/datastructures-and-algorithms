@@ -4,7 +4,7 @@
  * What if you cannot use an additional data structure?
  * */
 
-const strFuncs = require('./String/String');
+const strFuncs = require('../Data Structures/String/String');
 
 test('returns false on strings do not have unique characters', () => {
   const str = "Burger";

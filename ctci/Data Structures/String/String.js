@@ -29,14 +29,14 @@ module.exports = {
   },
   // Time complexity: O(n*log(n)) -> from sort
   // Space complexity: O(log(n)) -> from sort
-  isPermutation: (str1, str2) => {
+  isPermutation: (s1, s2) => {
     // Remove all white space
-    str1 = str1.replace(/\s/g, '').toLowerCase().split('').sort().join('');
-    str2 = str2.replace(/\s/g, '').toLowerCase().split('').sort().join('');
-    if (str1.length !== str2.length) return false;
-    const n = str1.length;
+    s1 = s1.replace(/\s/g, '').toLowerCase().split('').sort().join('');
+    s2 = s2.replace(/\s/g, '').toLowerCase().split('').sort().join('');
+    if (s1.length !== s2.length) return false;
+    const n = s1.length;
     for (let i = 0; i < n; i++) {
-      if (str1.charAt(i) !== str2.charAt(i)) return false;
+      if (s1.charAt(i) !== s2.charAt(i)) return false;
     }
     return true;
   },
@@ -72,18 +72,13 @@ module.exports = {
   },
   // Time complexity: O(n)
   // Space complexity: O(26)
-  oneAway: (str1, str2) => {
+  oneAway: (s1, s2) => {
     // Remove all white space
-    str1 = str1.replace(/\s/g, '').toLowerCase();
-    str2 = str2.replace(/\s/g, '').toLowerCase();
-    // Helper Functions
-    const getAlphabet = () => {
-      const alphabet = [];
-      for (let i = 97; i < 123; i++) {
-        alphabet.push(String.fromCharCode(i));
-      }
-      return alphabet;
-    };
+    s1 = s1.replace(/\s/g, '').toLowerCase();
+    s2 = s2.replace(/\s/g, '').toLowerCase();
+    const n = s1.length;
+    const m = s2.length;
+    if (n === 0 && m === 1) return true; // weird edge case
     const removeCharacter = (str, n, index) => {
       const front = str.slice(0, index);
       const end = str.slice(index + 1, n);
@@ -91,40 +86,51 @@ module.exports = {
     };
     const insertCharacter = (str, n, index, char) => {
       const front = str.slice(0, index);
-      const end = str.slice(index + 1, n);
+      const end = str.slice(index, n);
       return front.concat(char, end);
     };
     const replaceCharacter = (str, n, index, char) => {
       const front = str.slice(0, index);
-      const end = str.slice(index, n);
+      const end = str.slice(index + 1, n);
       return front.concat(char, end);
     };
-    // Constants
-    const n = str1.length;
-    const alphabet = getAlphabet();
-    const alphaLen = alphabet.length;
     // Check if removing a character makes strings equal
-    for (let i = 0; i < n; i++) {
-      const strRemoved = removeCharacter(str1, n, i);
-      if (strRemoved === str2) return true;
-    }
-    // Check if inserting a character makes strings equal
-    for (let i = 0; i < n; i++) {
-      for (let j = 0; j < alphaLen; j++) {
-        const strInserted = insertCharacter(str1, n, i, alphabet[j]);
-        if (strInserted === str2) return true;
+    if (n > m) {
+      for (let i = 0; i < n; i++) {
+        const strRemoved = removeCharacter(s1, n, i);
+        if (strRemoved === s2) return true;
       }
     }
+    const getAlphabet = () => {
+      const alphabet = [];
+      for (let i = 97; i < 123; i++) {
+        alphabet.push(String.fromCharCode(i));
+      }
+      return alphabet;
+    };
+    const alphabet = getAlphabet();
+    const alphaLen = alphabet.length;
     // Check if replacing a character makes strings equal
-    for (let i = 0; i < n; i++) {
-      for (let j = 0; j < alphaLen; j++) {
-        const strReplaced = replaceCharacter(str1, n, i, alphabet[j]);
-        if (strReplaced === str2) return true;
+    if (n === m) {
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < alphaLen; j++) {
+          const strReplaced = replaceCharacter(s1, n, i, alphabet[j]);
+          if (strReplaced === s2) return true;
+        }
+      }
+    }
+    // Check if inserting a character makes strings equal
+    if (n < m) {
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < alphaLen; j++) {
+          const strInserted = insertCharacter(s1, n, i, alphabet[j]);
+          if (strInserted === s2) return true;
+        }
       }
     }
     return false;
   },
-  // Time complexity: 0(n)
+  // Time complexity: O(n)
   // Space complexity: O(n)
   stringCompression: (str) => {
     const n = str.length;
@@ -133,14 +139,38 @@ module.exports = {
     let isCompressed = false;
     for (let i = 0; i < n; i += count) {
       let j = i + 1;
+      count = 1;
       while (str.charAt(i) === str.charAt(j)) {
         j++;
         count++;
       }
       if (count > 1) isCompressed = true;
       compressedStr += `${str.charAt(i)}${count}`;
-      count = 1;
     }
     return isCompressed ? compressedStr : str;
-  }
+  },
+  // Time complexity: O(n)
+  // Space complexity: O(n)
+  // With a call to isSubstring
+  stringRotationJS: (s1, s2) => ((s2 + s2).indexOf(s1) > -1),
+  // Time complexity: O(n)
+  // Space complexity: O(n)
+  // Without call to isSubstring
+  stringRotation: (s1, s2) => {
+    const s1Len = s1.length;
+    const s2Len = s1.length;
+    if (s1Len !== s2Len) return false;
+    let startIndex = 0;
+    s2 = s2 + s2;
+    for (let i = 0; i < s2Len; i++) {
+      if (s1.charAt(0) === s2.charAt(i)) {
+        startIndex = i;
+        break;
+      }
+    }
+    for (let j = startIndex, k = 0; j < 2 * s2Len, k < s1Len; j++, k++) {
+      if (s1.charAt(k) !== s2.charAt(j)) return false;
+    }
+    return true;
+  },
 };

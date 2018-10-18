@@ -6,7 +6,7 @@
  * not need to be limited to just dictionary words.
  * */
 
-const strFuncs = require('./String/String');
+const strFuncs = require('../Data Structures/String/String');
 
 test('returns true if a palindrome permutation', () => {
   const input = "Tact Coa";

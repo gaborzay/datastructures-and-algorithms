@@ -7,7 +7,7 @@
  * assume the string has only uppercase and lowercase letters (a-z);
  * */
 
-const strFuncs = require('./String/String');
+const strFuncs = require('../Data Structures/String/String');
 
 test('correctly compresses string with repeated characters', () => {
   const input = 'aabcccccaaa';

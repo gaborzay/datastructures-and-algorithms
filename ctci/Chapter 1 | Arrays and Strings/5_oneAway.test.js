@@ -5,9 +5,16 @@
  * write a function to check if they are on edit (or zero edits) away.
  * */
 
-const strFuncs = require('./String/String');
+const strFuncs = require('../Data Structures/String/String');
 
-// Removing Character
+// Removing Characters
+test('returns true when removing first character', () => {
+  const str1 = "a";
+  const str2 = "";
+  const result = strFuncs.oneAway(str1, str2);
+  expect(result).toBeTruthy();
+});
+
 test('returns true when removing first character', () => {
   const str1 = "pale";
   const str2 = "ale";
@@ -28,7 +35,15 @@ test('returns true when removing last character', () => {
   const result = strFuncs.oneAway(str1, str2);
   expect(result).toBeTruthy();
 });
-// Inserting Character
+
+// Inserting Characters
+test('returns true when inserting first character', () => {
+  const str1 = "";
+  const str2 = "b";
+  const result = strFuncs.oneAway(str1, str2);
+  expect(result).toBeTruthy();
+});
+
 test('returns true when inserting first character', () => {
   const str1 = "ales";
   const str2 = "pales";
@@ -49,7 +64,15 @@ test('returns true when inserting last character', () => {
   const result = strFuncs.oneAway(str1, str2);
   expect(result).toBeTruthy();
 });
-// Replacing Character
+
+// Replacing Characters
+test('returns true when replacing first character', () => {
+  const str1 = "a";
+  const str2 = "b";
+  const result = strFuncs.oneAway(str1, str2);
+  expect(result).toBeTruthy();
+});
+
 test('returns true when replacing first character', () => {
   const str1 = "pale";
   const str2 = "bale";
@@ -70,10 +93,18 @@ test('returns true when replacing last character', () => {
   const result = strFuncs.oneAway(str1, str2);
   expect(result).toBeTruthy();
 });
-// Failing Case
+
+// Failing Cases
 test('returns false when more than one away', () => {
   const str1 = "pale";
   const str2 = "bake";
+  const result = strFuncs.oneAway(str1, str2);
+  expect(result).toBeFalsy();
+});
+
+test('returns false when more than one away', () => {
+  const str1 = "palesss";
+  const str2 = "pale";
   const result = strFuncs.oneAway(str1, str2);
   expect(result).toBeFalsy();
 });

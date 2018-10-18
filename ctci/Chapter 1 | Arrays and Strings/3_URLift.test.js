@@ -5,7 +5,7 @@
  * characters, and that you are given the "true"
  */
 
-const strFuncs = require('./String/String');
+const strFuncs = require('../Data Structures/String/String');
 
 test('returns the correct encoded url', () => {
   const input = "Mr John Smith   ";

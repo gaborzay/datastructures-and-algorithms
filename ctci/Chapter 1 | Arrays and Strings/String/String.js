@@ -132,7 +132,6 @@ module.exports = {
     let compressedStr = "";
     let isCompressed = false;
     for (let i = 0; i < n; i += count) {
-      count = 1;
       let j = i + 1;
       while (str.charAt(i) === str.charAt(j)) {
         j++;
@@ -140,6 +139,7 @@ module.exports = {
       }
       if (count > 1) isCompressed = true;
       compressedStr += `${str.charAt(i)}${count}`;
+      count = 1;
     }
     return isCompressed ? compressedStr : str;
   }

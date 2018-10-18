@@ -105,23 +105,42 @@ module.exports = {
     const alphaLen = alphabet.length;
     // Check if removing a character makes strings equal
     for (let i = 0; i < n; i++) {
-      let strRemoved = removeCharacter(str1, n, i);
+      const strRemoved = removeCharacter(str1, n, i);
       if (strRemoved === str2) return true;
     }
     // Check if inserting a character makes strings equal
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < alphaLen; j++) {
-        let strInserted = insertCharacter(str1, n, i, alphabet[j]);
+        const strInserted = insertCharacter(str1, n, i, alphabet[j]);
         if (strInserted === str2) return true;
       }
     }
     // Check if replacing a character makes strings equal
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < alphaLen; j++) {
-        let strReplaced = replaceCharacter(str1, n, i, alphabet[j]);
+        const strReplaced = replaceCharacter(str1, n, i, alphabet[j]);
         if (strReplaced === str2) return true;
       }
     }
     return false;
   },
+  // Time complexity: 0(n)
+  // Space complexity: O(n)
+  stringCompression: (str) => {
+    const n = str.length;
+    let count = 1;
+    let compressedStr = "";
+    let isCompressed = false;
+    for (let i = 0; i < n; i += count) {
+      count = 1;
+      let j = i + 1;
+      while (str.charAt(i) === str.charAt(j)) {
+        j++;
+        count++;
+      }
+      if (count > 1) isCompressed = true;
+      compressedStr += `${str.charAt(i)}${count}`;
+    }
+    return isCompressed ? compressedStr : str;
+  }
 };

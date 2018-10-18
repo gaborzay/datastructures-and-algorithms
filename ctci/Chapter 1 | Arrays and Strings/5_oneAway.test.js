@@ -71,7 +71,7 @@ test('returns true when replacing last character', () => {
   expect(result).toBeTruthy();
 });
 // Failing Case
-test('returns false more than one away', () => {
+test('returns false when more than one away', () => {
   const str1 = "pale";
   const str2 = "bake";
   const result = strFuncs.oneAway(str1, str2);

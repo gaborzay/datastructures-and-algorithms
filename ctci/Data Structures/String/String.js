@@ -1,8 +1,12 @@
 'use strict';
 
 module.exports = {
-  // Time complexity: O(n^2)
-  // Space complexity: O(0)
+  /**
+   * Time complexity: O(n^2)
+   * Space complexity: O(1)
+   * @param str
+   * @returns {boolean}
+   */
   isUnique: (str) => {
     // Remove all white space
     str = str.replace(/\s/g, '').toLowerCase();
@@ -14,21 +18,30 @@ module.exports = {
     }
     return true;
   },
-  // Time complexity: O(n)
-  // Space complexity: O(256) -> 2 bytes per character in JS
+  /**
+   * Time complexity: O(n)
+   * Space complexity: O(256) -> 2 bytes per character in JS
+   * @param str
+   * @returns {boolean}
+   */
   isUniqueHash: (str) => {
-    let hashTable = {};
+    const set = new Set();
     // Remove all white space
     str = str.replace(/\s/g, '').toLowerCase();
     const n = str.length;
     for (let i = 0; i < n; i++) {
-      if (hashTable[str[i]]) return false;
-      else hashTable[str[i]] = 1;
+      if (set.has(str[i])) return false;
+      set.add(str[i]);
     }
     return true;
   },
-  // Time complexity: O(n*log(n)) -> from sort
-  // Space complexity: O(log(n)) -> from sort
+  /**
+   * Time complexity: O(n*log(n)) -> from sort
+   * Space complexity: O(log(n)) -> from sort
+   * @param s1
+   * @param s2
+   * @returns {boolean}
+   */
   isPermutation: (s1, s2) => {
     // Remove all white space
     s1 = s1.replace(/\s/g, '').toLowerCase().split('').sort().join('');
@@ -40,8 +53,13 @@ module.exports = {
     }
     return true;
   },
-  // Time complexity: O(n)
-  // Space complexity: O(n)
+  /**
+   * Time complexity: O(n)
+   * Space complexity: O(n)
+   * @param str
+   * @param n
+   * @returns {string}
+   */
   urlify: (str, n) => {
     let newStr = "";
     for (let i = 0; i < n; i++) {
@@ -52,26 +70,36 @@ module.exports = {
   },
   // The JS way to do it
   urlifyJS: (str) => (str.trim().replace(/\s/g, '%20')),
-  // Time complexity: O(n)
-  // Space complexity: O(256) -> 2 bytes per character in JS
+  /**
+   * Time complexity: O(n)
+   * Space complexity: O(256) -> 2 bytes per character in JS
+   * @param str
+   * @returns {boolean}
+   */
   palindromePermutation: (str) => {
     // Remove all white space
     str = str.replace(/\s/g, '').toLowerCase().split('').sort();
     const n = str.length;
-    let hashTable = {};
+    const map = new Map();
     let oddChars = 0;
     for (let i = 0; i < n; i++) {
-      if (!hashTable[str[i]]) hashTable[str[i]] = 1;
-      else hashTable[str[i]] += 1;
+      const char = str[i];
+      if (!map.has(char)) map.set(char, 1);
+      else map.set(char, map.get(char)+1);
     }
     // Count number of odd characters
-    for (let char in hashTable) {
-      if (hashTable.hasOwnProperty(char) && hashTable[char] % 2 !== 0) oddChars++;
+    for (let char of map.keys()) {
+      if (map.has(char) && map.get(char) % 2 !== 0) oddChars++;
     }
     return oddChars < 2;
   },
-  // Time complexity: O(n)
-  // Space complexity: O(26)
+  /**
+   * Time complexity: O(n)
+   * Space complexity: O(26)
+   * @param s1
+   * @param s2
+   * @returns {boolean}
+   */
   oneAway: (s1, s2) => {
     // Remove all white space
     s1 = s1.replace(/\s/g, '').toLowerCase();
@@ -130,8 +158,12 @@ module.exports = {
     }
     return false;
   },
-  // Time complexity: O(n)
-  // Space complexity: O(n)
+  /**
+   * Time complexity: O(n)
+   * Space complexity: O(n)
+   * @param str
+   * @returns {string}
+   */
   stringCompression: (str) => {
     const n = str.length;
     let count = 1;
@@ -149,13 +181,23 @@ module.exports = {
     }
     return isCompressed ? compressedStr : str;
   },
-  // Time complexity: O(n)
-  // Space complexity: O(n)
-  // With a call to isSubstring
+  /**
+   * Time complexity: O(n)
+   * Space complexity: O(n)
+   * With a call to isSubstring
+   * @param s1
+   * @param s2
+   * @returns {boolean}
+   */
   stringRotationJS: (s1, s2) => ((s2 + s2).indexOf(s1) > -1),
-  // Time complexity: O(n)
-  // Space complexity: O(n)
-  // Without call to isSubstring
+  /**
+   * Time complexity: O(n)
+   * Space complexity: O(n)
+   * Without call to isSubstring
+   * @param s1
+   * @param s2
+   * @returns {boolean}
+   */
   stringRotation: (s1, s2) => {
     const s1Len = s1.length;
     const s2Len = s1.length;

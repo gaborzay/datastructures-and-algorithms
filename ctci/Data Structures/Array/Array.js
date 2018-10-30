@@ -1,8 +1,12 @@
 'use strict';
 
 module.exports = {
-  // Time complexity: O(n*log(n))
-  // Space complexity: O(0)
+  /**
+   * Time complexity: O(n*log(n))
+   * Space complexity: O(1)
+   * @param mat
+   * @returns {boolean}
+   */
   rotateMatrix: (mat) => {
     if (mat.length < 1 || mat[0].length < 1 || mat.length !== mat[0].length) return false;
     const n = mat.length;
@@ -20,8 +24,13 @@ module.exports = {
     }
     return true;
   },
-  // Time complexity: O(mn)
-  // Space complexity: O(m+n)
+
+  /**
+   * Time complexity: O(mn)
+   * Space complexity: O(m+n)
+   * @param mat
+   * @returns {boolean}
+   */
   zeroMatrix: (mat) => {
     if (mat.length < 1 || mat[0].length < 1) return false;
     const m = mat.length;
@@ -49,5 +58,12 @@ module.exports = {
     rowsToSet.forEach((row) => setRowZero(mat, row, n));
     columnsToSet.forEach((column) => setColumnZero(mat, column, m));
     return true;
+  },
+  // Helper Functions
+  fillArray: (low, high, num, arr = []) => {
+    for (let i = 0; i < num; i++) {
+      arr.push(Math.floor(Math.random() * high) + low);
+    }
+    return arr;
   }
 };

@@ -5,18 +5,18 @@
  * characters, and that you are given the "true"
  */
 
-const strFuncs = require('../Data Structures/String/String');
+const MyString = require('../Data Structures/String/String');
 
-test('returns the correct encoded url', () => {
-  const input = "Mr John Smith   ";
+test('urlify returns the correct encoded url', () => {
+  const input = new MyString("Mr John Smith   ");
   const expectedOutput = "Mr%20John%20Smith";
-  const urlify = strFuncs.urlify(input, 13);
+  const urlify = input.urlify();
   expect(urlify).toBe(expectedOutput);
 });
 
-test('returns the correct encoded url', () => {
-  const input = "Mr John Smith   ";
+test('urlifyJS returns the correct encoded url', () => {
+  const input = new MyString("Mr John Smith   ");
   const expectedOutput = "Mr%20John%20Smith";
-  const urlify = strFuncs.urlifyJS(input);
+  const urlify = input.urlifyJS();
   expect(urlify).toBe(expectedOutput);
 });

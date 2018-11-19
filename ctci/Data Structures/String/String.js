@@ -1,109 +1,111 @@
 'use strict';
 
-module.exports = {
+class MyString extends String {
+  constructor(...props) {
+    super(...props);
+  }
+
   /**
    * Time complexity: O(n^2)
    * Space complexity: O(1)
-   * @param str
    * @returns {boolean}
    */
-  isUnique: (str) => {
+  isUnique() {
     // Remove all white space
-    str = str.replace(/\s/g, '').toLowerCase();
-    const n = str.length;
-    for (let i = 0; i < n; i++) {
+    const str = this.replace(/\s/g, '').toLowerCase();
+    for (let i = 0, n = str.length; i < n; i++) {
       for (let j = i + 1; j < n; j++) {
         if (str[i] === str[j]) return false;
       }
     }
     return true;
-  },
+  }
+
   /**
    * Time complexity: O(n)
    * Space complexity: O(256) -> 2 bytes per character in JS
-   * @param str
    * @returns {boolean}
    */
-  isUniqueHash: (str) => {
+  isUniqueHash() {
     const set = new Set();
     // Remove all white space
-    str = str.replace(/\s/g, '').toLowerCase();
-    const n = str.length;
-    for (let i = 0; i < n; i++) {
+    const str = this.replace(/\s/g, '').toLowerCase();
+    for (let i = 0, n = str.length; i < n; i++) {
       if (set.has(str[i])) return false;
       set.add(str[i]);
     }
     return true;
-  },
+  }
+
   /**
    * Time complexity: O(n*log(n)) -> from sort
    * Space complexity: O(log(n)) -> from sort
-   * @param s1
-   * @param s2
+   * @param str
    * @returns {boolean}
    */
-  isPermutation: (s1, s2) => {
+  isPermutation(str) {
     // Remove all white space
-    s1 = s1.replace(/\s/g, '').toLowerCase().split('').sort().join('');
-    s2 = s2.replace(/\s/g, '').toLowerCase().split('').sort().join('');
+    const s1 = this.replace(/\s/g, '').toLowerCase().split('').sort().join('');
+    const s2 = str.replace(/\s/g, '').toLowerCase().split('').sort().join('');
     if (s1.length !== s2.length) return false;
-    const n = s1.length;
-    for (let i = 0; i < n; i++) {
+    for (let i = 0, n = s1.length; i < n; i++) {
       if (s1.charAt(i) !== s2.charAt(i)) return false;
     }
     return true;
-  },
+  }
+
   /**
    * Time complexity: O(n)
    * Space complexity: O(n)
-   * @param str
-   * @param n
    * @returns {string}
    */
-  urlify: (str, n) => {
+  urlify() {
+    const str = this.trim();
     let newStr = "";
-    for (let i = 0; i < n; i++) {
+    for (let i = 0, n = str.length; i < n; i++) {
       if (str[i] === " ") newStr += "%20";
       else newStr += str[i];
     }
     return newStr;
-  },
+  }
+
   // The JS way to do it
-  urlifyJS: (str) => (str.trim().replace(/\s/g, '%20')),
+  urlifyJS() {
+    return this.trim().replace(/\s/g, '%20')
+  }
+
   /**
    * Time complexity: O(n)
    * Space complexity: O(256) -> 2 bytes per character in JS
-   * @param str
    * @returns {boolean}
    */
-  palindromePermutation: (str) => {
+  palindromePermutation() {
     // Remove all white space
-    str = str.replace(/\s/g, '').toLowerCase().split('').sort();
-    const n = str.length;
+    const str = this.replace(/\s/g, '').toLowerCase().split('').sort();
     const map = new Map();
     let oddChars = 0;
-    for (let i = 0; i < n; i++) {
+    for (let i = 0, n = str.length; i < n; i++) {
       const char = str[i];
       if (!map.has(char)) map.set(char, 1);
-      else map.set(char, map.get(char)+1);
+      else map.set(char, map.get(char) + 1);
     }
     // Count number of odd characters
     for (let char of map.keys()) {
       if (map.has(char) && map.get(char) % 2 !== 0) oddChars++;
     }
     return oddChars < 2;
-  },
+  }
+
   /**
    * Time complexity: O(n)
    * Space complexity: O(26)
-   * @param s1
-   * @param s2
+   * @param str
    * @returns {boolean}
    */
-  oneAway: (s1, s2) => {
+  oneAway(str) {
     // Remove all white space
-    s1 = s1.replace(/\s/g, '').toLowerCase();
-    s2 = s2.replace(/\s/g, '').toLowerCase();
+    const s1 = this.replace(/\s/g, '').toLowerCase();
+    const s2 = str.replace(/\s/g, '').toLowerCase();
     const n = s1.length;
     const m = s2.length;
     if (n === 0 && m === 1) return true; // weird edge case
@@ -157,62 +159,66 @@ module.exports = {
       }
     }
     return false;
-  },
+  }
+
   /**
    * Time complexity: O(n)
    * Space complexity: O(n)
-   * @param str
    * @returns {string}
    */
-  stringCompression: (str) => {
-    const n = str.length;
+  stringCompression() {
     let count = 1;
     let compressedStr = "";
     let isCompressed = false;
-    for (let i = 0; i < n; i += count) {
+    for (let i = 0, n = this.length; i < n; i += count) {
       let j = i + 1;
       count = 1;
-      while (str.charAt(i) === str.charAt(j)) {
+      while (this.charAt(i) === this.charAt(j)) {
         j++;
         count++;
       }
       if (count > 1) isCompressed = true;
-      compressedStr += `${str.charAt(i)}${count}`;
+      compressedStr += `${this.charAt(i)}${count}`;
     }
-    return isCompressed ? compressedStr : str;
-  },
+    return isCompressed ? compressedStr : this.toString();
+  }
+
   /**
    * Time complexity: O(n)
    * Space complexity: O(n)
    * With a call to isSubstring
-   * @param s1
-   * @param s2
+   * @param str
    * @returns {boolean}
    */
-  stringRotationJS: (s1, s2) => ((s2 + s2).indexOf(s1) > -1),
+  stringRotationJS(str) {
+    return (str + str).indexOf(this) > -1
+  }
+
   /**
    * Time complexity: O(n)
    * Space complexity: O(n)
    * Without call to isSubstring
-   * @param s1
-   * @param s2
+   * @param str
    * @returns {boolean}
    */
-  stringRotation: (s1, s2) => {
-    const s1Len = s1.length;
-    const s2Len = s1.length;
+  stringRotation(str) {
+    const s1Len = this.length;
+    const s2Len = str.length;
     if (s1Len !== s2Len) return false;
     let startIndex = 0;
-    s2 = s2 + s2;
+    str = str + str;
     for (let i = 0; i < s2Len; i++) {
-      if (s1.charAt(0) === s2.charAt(i)) {
+      if (this.charAt(0) === str.charAt(i)) {
         startIndex = i;
         break;
       }
     }
     for (let j = startIndex, k = 0; j < 2 * s2Len, k < s1Len; j++, k++) {
-      if (s1.charAt(k) !== s2.charAt(j)) return false;
+      if (this.charAt(k) !== str.charAt(j)) return false;
     }
     return true;
-  },
-};
+  }
+}
+
+
+module.exports = MyString;

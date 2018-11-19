@@ -7,18 +7,18 @@
  * assume the string has only uppercase and lowercase letters (a-z);
  * */
 
-const strFuncs = require('../Data Structures/String/String');
+const MyString = require('../Data Structures/String/String');
 
 test('correctly compresses string with repeated characters', () => {
-  const input = 'aabcccccaaa';
+  const input = new MyString('aabcccccaaa');
   const expectedOutput = 'a2b1c5a3';
-  const output = strFuncs.stringCompression(input);
+  const output = input.stringCompression();
   expect(output).toBe(expectedOutput);
 });
 
 test('correctly compresses string with no repeated characters', () => {
-  const input = 'abc';
+  const input = new MyString('abc');
   const expectedOutput = 'abc';
-  const output = strFuncs.stringCompression(input);
+  const output = input.stringCompression();
   expect(output).toBe(expectedOutput);
 });

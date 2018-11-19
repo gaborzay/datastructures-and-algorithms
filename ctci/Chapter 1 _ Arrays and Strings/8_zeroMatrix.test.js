@@ -4,7 +4,7 @@
  * row and column are set to 0.
  * */
 
-const arrFuncs = require('../Data Structures/Array/Array');
+const MyArray = require('../Data Structures/Array/Array');
 
 const checkHelper = (input, expectedOutput) => {
   const m = input.length;
@@ -17,46 +17,67 @@ const checkHelper = (input, expectedOutput) => {
 };
 
 test('check if empty matrix is rejected', () => {
-  const input = [];
-  const output = arrFuncs.zeroMatrix(input);
+  const input = new MyArray(0);
+  const output = input.zeroMatrix();
   expect(output).toBeFalsy();
 });
 
 test('check if empty 1x1 matrix is rejected', () => {
-  const input = [[]];
-  const output = arrFuncs.zeroMatrix(input);
+  const input = new MyArray(
+    []
+  );
+  const output = input.zeroMatrix();
   expect(output).toBeFalsy();
 });
 
 test('check if 1x2 matrix with a 0 is set correctly', () => {
-  const input = [[0, 1]];
+  const input = new MyArray(
+    [0, 1]
+  );
   const expectedOutput = [[0, 0]];
-  const output = arrFuncs.zeroMatrix(input);
+  const output = input.zeroMatrix();
   expect(output).toBeTruthy();
   checkHelper(input, expectedOutput);
 });
 
 test('check if 1x2 matrix without a 0 is set correctly', () => {
-  const input = [[1, 1]];
+  const input = new MyArray(
+    [1, 1]
+  );
   const expectedOutput = [[1, 1]];
-  const output = arrFuncs.zeroMatrix(input);
+  const output = input.zeroMatrix();
   expect(output).toBeTruthy();
   checkHelper(input, expectedOutput);
 });
 
-
 test('check if 3x5 matrix with a 0 is set correctly', () => {
-  const input = [[1,1,1,1,0],[0,1,1,1,1],[1,1,1,1,1]];
-  const expectedOutput = [[0,0,0,0,0],[0,0,0,0,0],[0,1,1,1,0]];
-  const output = arrFuncs.zeroMatrix(input);
+  const input = new MyArray(
+    [1, 1, 1, 1, 0],
+    [0, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+  );
+  const expectedOutput = [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0]
+  ];
+  const output = input.zeroMatrix();
   expect(output).toBeTruthy();
   checkHelper(input, expectedOutput);
 });
 
 test('check if 3x5 matrix without a 0 is set correctly', () => {
-  const input = [[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]];
-  const expectedOutput = [[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]];
-  const output = arrFuncs.zeroMatrix(input);
+  const input = new MyArray(
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+  );
+  const expectedOutput = [
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1]
+  ];
+  const output = input.zeroMatrix();
   expect(output).toBeTruthy();
   checkHelper(input, expectedOutput);
 });

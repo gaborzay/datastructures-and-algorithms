@@ -2,7 +2,7 @@
   "name": "javascript-practice",
   "version": "1.0.0",
   "description": "A place to practice data structures algorithms with jest.",
-  "main": "index.js",
+  "main": "playground/index.js",
   "scripts": {
     "test": "jest"
   },

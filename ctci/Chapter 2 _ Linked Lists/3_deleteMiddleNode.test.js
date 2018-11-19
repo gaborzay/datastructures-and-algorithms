@@ -17,29 +17,9 @@ beforeEach(() => {
 
 test('should delete node in middle of list', () => {
   const arr = ['a', 'b', 'c', 'd', 'e', 'f'];
-  const input = 'c';
   const expectedOutput = ['a', 'b', 'd', 'e', 'f'];
   linkedList.generateSinglyLinkedListFromArray(arr);
-  linkedList.deleteMiddleNode(input);
-  const output = linkedList.listArray;
-  expect(output).toEqual(expectedOutput);
-});
-
-test('should not delete anything if node does not exist', () => {
-  const arr = ['a', 'b', 'c', 'd', 'e', 'f'];
-  const input = 'g';
-  const expectedOutput = [...arr];
-  linkedList.generateSinglyLinkedListFromArray(arr);
-  linkedList.deleteMiddleNode(input);
-  const output = linkedList.listArray;
-  expect(output).toEqual(expectedOutput);
-});
-
-test('should not delete anything if node does not exist in empty array', () => {
-  const arr = [];
-  const input = '';
-  const expectedOutput = [...arr];
-  linkedList.generateSinglyLinkedListFromArray(arr);
+  const input = linkedList.returnKthToLast(3);
   linkedList.deleteMiddleNode(input);
   const output = linkedList.listArray;
   expect(output).toEqual(expectedOutput);

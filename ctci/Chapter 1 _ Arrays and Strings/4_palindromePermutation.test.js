@@ -6,16 +6,16 @@
  * not need to be limited to just dictionary words.
  * */
 
-const strFuncs = require('../Data Structures/String/String');
+const MyString = require('../Data Structures/String/String');
 
 test('returns true if a palindrome permutation', () => {
-  const input = "Tact Coa";
-  const isPalindrome = strFuncs.palindromePermutation(input);
+  const input = new MyString("Tact Coa");
+  const isPalindrome = input.palindromePermutation();
   expect(isPalindrome).toBeTruthy();
 });
 
 test('returns false if not a palindrome permutation', () => {
-  const input = "Hello World";
-  const isPalindrome = strFuncs.palindromePermutation(input);
+  const input = new MyString("Hello World");
+  const isPalindrome = input.palindromePermutation();
   expect(isPalindrome).toBeFalsy();
 });

@@ -6,81 +6,81 @@
  * rotation of "erbottlewat").
  * */
 
-const strFuncs = require('../Data Structures/String/String');
+const MyString = require('../Data Structures/String/String');
 
 test('check if correctly identifies rotation', () => {
-  const s1 = '';
+  const s1 = new MyString('');
   const s2 = '';
-  const output = strFuncs.stringRotationJS(s1,s2);
+  const output = s1.stringRotationJS(s2);
   expect(output).toBeTruthy();
 });
 
 test('check if correctly identifies rotation', () => {
-  const s1 = 'waterbottle';
+  const s1 = new MyString('waterbottle');
   const s2 = 'erbottlewat';
-  const output = strFuncs.stringRotationJS(s1,s2);
+  const output = s1.stringRotationJS(s2);
   expect(output).toBeTruthy();
 });
 
 test('check if correctly identifies rotation', () => {
-  const s1 = 'hello';
+  const s1 = new MyString('hello');
   const s2 = 'hello';
-  const output = strFuncs.stringRotationJS(s1,s2);
+  const output = s1.stringRotationJS(s2);
   expect(output).toBeTruthy();
 });
 
 test('check if correctly identifies non-rotation', () => {
-  const s1 = 'hello';
+  const s1 = new MyString('hello');
   const s2 = 'world';
-  const output = strFuncs.stringRotationJS(s1,s2);
+  const output = s1.stringRotationJS(s2);
   expect(output).toBeFalsy();
 });
 
 test('check if correctly identifies wrong sized string', () => {
-  const s1 = 'hello';
+  const s1 = new MyString('hello');
   const s2 = 'wor';
-  const output = strFuncs.stringRotationJS(s1,s2);
+  const output = s1.stringRotationJS(s2);
   expect(output).toBeFalsy();
 });
 
 test('check if correctly identifies wrong sized string', () => {
-  const s1 = 'he';
+  const s1 = new MyString('he');
   const s2 = 'world';
-  const output = strFuncs.stringRotationJS(s1,s2);
+  const output = s1.stringRotationJS(s2);
   expect(output).toBeFalsy();
 });
 
 test('check if correctly identifies rotation', () => {
-  const s1 = 'waterbottle';
+  const s1 = new MyString('waterbottle');
   const s2 = 'erbottlewat';
-  const output = strFuncs.stringRotation(s1,s2);
+  const output = s1.stringRotation(s2);
   expect(output).toBeTruthy();
 });
 
 test('check if correctly identifies rotation', () => {
-  const s1 = 'hello';
+  const s1 = new MyString('hello');
   const s2 = 'hello';
-  const output = strFuncs.stringRotation(s1,s2);
+  const output = s1.stringRotation(s2);
   expect(output).toBeTruthy();
 });
 
 test('check if correctly identifies non-rotation', () => {
-  const s1 = 'hello';
+  const s1 = new MyString('hello');
   const s2 = 'world';
-  const output = strFuncs.stringRotation(s1,s2);
+  const output = s1.stringRotation(s2);
   expect(output).toBeFalsy();
 });
 
 test('check if correctly identifies wrong sized string', () => {
-  const s1 = 'hello';
+  const s1 = new MyString('hello');
   const s2 = 'wor';
-  const output = strFuncs.stringRotation(s1,s2);
+  const output = s1.stringRotation(s2);
   expect(output).toBeFalsy();
 });
 
 test('check if correctly identifies wrong sized string', () => {
-  const s1 = 'he';
+  const s1 = new MyString('he');
   const s2 = 'world';
-  const output = strFuncs.stringRotation(s1,s2);
+  const output = s1.stringRotation(s2);
   expect(output).toBeFalsy();
 });

@@ -66,18 +66,12 @@ class LinkedList {
    * Time complexity:
    * Space complexity:
    */
-  deleteMiddleNode(k) {
-    let n = this.head;
-    let p = null;
-    while (n !== null) {
-      if (n.data === k) {
-        this.deleteNode(p, n);
-        return;
-      }
-      p = n;
-      n = n.next;
-    }
-    return false;
+  deleteMiddleNode(n) {
+    if (n === null || n.next === null) return false;
+    let next = n.next;
+    n.data = next.data;
+    n.next = next.next;
+    return true;
   }
 
   // Helper Functions

@@ -4,28 +4,28 @@
  * What if you cannot use an additional data structure?
  * */
 
-const strFuncs = require('../Data Structures/String/String');
+const MyString = require('../Data Structures/String/String');
 
 test('returns false on strings do not have unique characters', () => {
-  const str = "Burger";
-  const isUnique = strFuncs.isUnique(str);
+  const str = new MyString("Burger");
+  const isUnique = str.isUnique();
   expect(isUnique).toBeFalsy();
 });
 
 test('returns true on strings that are unique (ignores whitespace)', () => {
-  const str = "   World!   ";
-  const isUnique = strFuncs.isUnique(str);
+  const str = new MyString("   World!   ");
+  const isUnique = str.isUnique();
   expect(isUnique).toBeTruthy();
 });
 
 test('returns false on strings do not have unique characters', () => {
-  const str = "Burger";
-  const isUnique = strFuncs.isUniqueHash(str);
+  const str = new MyString("Burger");
+  const isUnique = str.isUniqueHash();
   expect(isUnique).toBeFalsy();
 });
 
 test('returns true on strings that are unique (ignores whitespace)', () => {
-  const str = "   World!   ";
-  const isUnique = strFuncs.isUniqueHash(str);
+  const str = new MyString("   World!   ");
+  const isUnique = str.isUniqueHash();
   expect(isUnique).toBeTruthy();
 });

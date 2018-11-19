@@ -1,15 +1,18 @@
 'use strict';
 
-module.exports = {
+class MyArray extends Array {
+  constructor(...props) {
+    super(...props);
+  }
+
   /**
    * Time complexity: O(n*log(n))
    * Space complexity: O(1)
-   * @param mat
    * @returns {boolean}
    */
-  rotateMatrix: (mat) => {
-    if (mat.length < 1 || mat[0].length < 1 || mat.length !== mat[0].length) return false;
-    const n = mat.length;
+  rotateMatrix() {
+    if (this.length < 1 || this[0].length < 1 || this.length !== this[0].length) return false;
+    const n = this.length;
     const swap = (mat, n, i, j) => {
       const temp = mat[j][n - i - 1];
       mat[j][n - i - 1] = mat[i][j];
@@ -19,22 +22,21 @@ module.exports = {
     };
     for (let i = 0; i < n - 1; i++) {
       for (let j = i; j < n - i - 1; j++) {
-        swap(mat, n, i, j);
+        swap(this, n, i, j);
       }
     }
     return true;
-  },
+  }
 
   /**
    * Time complexity: O(mn)
    * Space complexity: O(m+n)
-   * @param mat
    * @returns {boolean}
    */
-  zeroMatrix: (mat) => {
-    if (mat.length < 1 || mat[0].length < 1) return false;
-    const m = mat.length;
-    const n = mat[0].length;
+  zeroMatrix() {
+    if (this.length < 1 || this[0].length < 1) return false;
+    const m = this.length;
+    const n = this[0].length;
     const rowsToSet = [];
     const columnsToSet = [];
     const setRowZero = (mat, row, n) => {
@@ -49,21 +51,30 @@ module.exports = {
     };
     for (let i = 0; i < m; i++) {
       for (let j = 0; j < n; j++) {
-        if (mat[i][j] === 0) {
+        if (this[i][j] === 0) {
           rowsToSet.push(i);
           columnsToSet.push(j);
         }
       }
     }
-    rowsToSet.forEach((row) => setRowZero(mat, row, n));
-    columnsToSet.forEach((column) => setColumnZero(mat, column, m));
+    rowsToSet.forEach((row) => setRowZero(this, row, n));
+    columnsToSet.forEach((column) => setColumnZero(this, column, m));
     return true;
-  },
-  // Helper Functions
-  fillArray: (low, high, num, arr = []) => {
-    for (let i = 0; i < num; i++) {
-      arr.push(Math.floor(Math.random() * high) + low);
-    }
-    return arr;
   }
-};
+
+  /**
+   * Time complexity: O(n)
+   * Space complexity: O(n)
+   * @param low
+   * @param high
+   * @param num
+   * @param start
+   */
+  fillArray(num = 10, low = 0, high = 100, start = 0) {
+    for (let i = start; i < num; i++) {
+      this[i] = (Math.floor(Math.random() * high) + low);
+    }
+  }
+}
+
+module.exports = MyArray;

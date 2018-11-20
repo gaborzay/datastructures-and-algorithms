@@ -18,9 +18,93 @@ const LinkedList = require('../Data Structures/LinkedList/LinkedList');
 const linkedList = new LinkedList();
 
 beforeEach(() => {
-  linkedList.reset();
+	linkedList.reset();
 });
 
-test('', () => {
-  expect(true).toEqual(true);
+test('should correctly return sum when linked lists are same length', () => {
+	const a = new LinkedList();
+	const b = new LinkedList();
+	const aValue = 617;
+	const bValue = 295;
+	const expectedOutput = aValue + bValue;
+
+	a.generateSinglyLinkedListFromArray(String(aValue).split('').reverse().map(a => Number(a)));
+	b.generateSinglyLinkedListFromArray(String(bValue).split('').reverse().map(a => Number(a)));
+
+	linkedList._sumListsReverse(a.head, b.head);
+
+	const outputArr = linkedList.generateArrayFromList();
+	const output = Number(outputArr.reverse().join(''));
+
+	expect(output).toEqual(expectedOutput);
+});
+
+test('should correctly return sum when first linked list is longer', () => {
+	const a = new LinkedList();
+	const b = new LinkedList();
+	const aValue = 5617;
+	const bValue = 298;
+	const expectedOutput = aValue + bValue;
+
+	a.generateSinglyLinkedListFromArray(String(aValue).split('').reverse().map(a => Number(a)));
+	b.generateSinglyLinkedListFromArray(String(bValue).split('').reverse().map(a => Number(a)));
+
+	linkedList._sumListsReverse(a.head, b.head);
+
+	const outputArr = linkedList.generateArrayFromList();
+	const output = Number(outputArr.reverse().join(''));
+
+	expect(output).toEqual(expectedOutput);
+});
+
+test('should correctly return sum when first linked list is shorter', () => {
+	const a = new LinkedList();
+	const b = new LinkedList();
+	const aValue = 17;
+	const bValue = 295;
+	const expectedOutput = aValue + bValue;
+
+	a.generateSinglyLinkedListFromArray(String(aValue).split('').reverse().map(a => Number(a)));
+	b.generateSinglyLinkedListFromArray(String(bValue).split('').reverse().map(a => Number(a)));
+
+	linkedList._sumListsReverse(a.head, b.head);
+
+	const outputArr = linkedList.generateArrayFromList();
+	const output = Number(outputArr.reverse().join(''));
+
+	expect(output).toEqual(expectedOutput);
+});
+
+test('should correctly return sum when first linked list is empty', () => {
+	const a = new LinkedList();
+	const b = new LinkedList();
+	const aValue = 0;
+	const bValue = 295;
+	const expectedOutput = aValue + bValue;
+
+	b.generateSinglyLinkedListFromArray(String(bValue).split('').reverse().map(a => Number(a)));
+
+	linkedList._sumListsReverse(a.head, b.head);
+
+	const outputArr = linkedList.generateArrayFromList();
+	const output = Number(outputArr.reverse().join(''));
+
+	expect(output).toEqual(expectedOutput);
+});
+
+test('should correctly return sum when second linked list is empty', () => {
+	const a = new LinkedList();
+	const b = new LinkedList();
+	const aValue = 0;
+	const bValue = 295;
+	const expectedOutput = aValue + bValue;
+
+	b.generateSinglyLinkedListFromArray(String(bValue).split('').reverse().map(a => Number(a)));
+
+	linkedList._sumListsReverse(b.head, a.head);
+
+	const outputArr = linkedList.generateArrayFromList();
+	const output = Number(outputArr.reverse().join(''));
+
+	expect(output).toEqual(expectedOutput);
 });

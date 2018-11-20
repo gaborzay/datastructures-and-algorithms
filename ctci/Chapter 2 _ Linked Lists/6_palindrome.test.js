@@ -7,9 +7,27 @@ const LinkedList = require('../Data Structures/LinkedList/LinkedList');
 const linkedList = new LinkedList();
 
 beforeEach(() => {
-  linkedList.reset();
+	linkedList.reset();
 });
 
-test('', () => {
-  expect(true).toEqual(true);
+test('should return true if it is a palindrome', () => {
+	const a = new LinkedList();
+	const input = 'racecar'.split('');
+
+	a.generateSinglyLinkedListFromArray(input);
+
+	const output = a._palindrome();
+
+	expect(output).toBeTruthy();
+});
+
+test('should return false if it is not a palindrome', () => {
+	const a = new LinkedList();
+	const input = 'race'.split('');
+
+	a.generateSinglyLinkedListFromArray(input);
+
+	const output = a._palindrome();
+
+	expect(output).toBeFalsy();
 });
